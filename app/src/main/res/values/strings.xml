@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MoviesTMDB</string>
+    <string name="developed_by_karlis_stekels">Developed by Karlis Stekels</string>
+    <string name="popularity">Popularity </string>
+    <string name="rating">Rating</string>
+    <string name="genre">Genre</string>
+    <string name="release_date">Release date</string>
+    <string name="original_language">original language</string>
+    <string name="overview">Overview</string>
+    <string name="production_companies">Production companies</string>
+    <string name="production_countries">production countries</string>
+    <string name="search">Search</string>
+    <string name="homepage">Homepage</string>
+    <string name="youtube">YouTube</string>
+</resources>

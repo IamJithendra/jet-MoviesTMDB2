@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="30dp"
+    android:layout_margin="4dp"
+    android:id="@+id/MoviesCardViewItem"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/RowItemPosterCardView"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/MoviePosterImage"
+                android:layout_width="120dp"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/preview_poster" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/MovieTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/cinzel_decorative_black"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RowItemPosterCardView"
+            app:layout_constraintTop_toTopOf="@+id/RowItemPosterCardView"
+            tools:text="Wrath of Man Wrath of Man" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ratingStarsCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/MovieTitle"
+            app:layout_constraintTop_toBottomOf="@+id/MovieTitle"
+            android:layout_marginTop="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/details_star1"
+                    style="@style/smallStarSize"
+                    android:src="@drawable/ic_baseline_star_24"
+                    app:tint="@color/orange"
+                    android:alpha="0.8"/>
+                <ImageView
+                    android:id="@+id/details_star2"
+                    style="@style/smallStarSize"
+                    android:src="@drawable/ic_baseline_star_24"
+                    app:tint="@color/orange"
+                    android:alpha="0.8"/>
+                <ImageView
+                    android:id="@+id/details_star3"
+                    style="@style/smallStarSize"
+                    android:src="@drawable/ic_baseline_star_half_24"
+                    app:tint="@color/orange"
+                    android:alpha="0.8"/>
+                <ImageView
+                    android:id="@+id/details_star4"
+                    style="@style/smallStarSize"
+                    android:src="@drawable/ic_baseline_star_border_24"
+                    app:tint="@color/orange"
+                    android:alpha="0.8"/>
+                <ImageView
+                    android:id="@+id/details_star5"
+                    style="@style/smallStarSize"
+                    android:src="@drawable/ic_baseline_star_border_24"
+                    app:tint="@color/orange"
+                    android:alpha="0.8" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/PopularityTitle"
+            style="@style/main_small_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/permanent_marker"
+            android:text="@string/popularity"
+            app:layout_constraintStart_toStartOf="@+id/ratingStarsCardView"
+            app:layout_constraintTop_toBottomOf="@+id/ratingStarsCardView" />
+
+        <TextView
+            android:id="@+id/MoviePopularity"
+            style="@style/main_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:fontFamily="@font/chewy"
+            app:layout_constraintBaseline_toBaselineOf="@+id/PopularityTitle"
+            app:layout_constraintStart_toEndOf="@+id/PopularityTitle"
+            tools:text="1898" />
+
+        <TextView
+            android:id="@+id/RatingTitle"
+            style="@style/main_small_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/rating"
+            app:layout_constraintBottom_toBottomOf="@+id/RowItemPosterCardView"
+            app:layout_constraintStart_toStartOf="@+id/PopularityTitle" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardViewMovieRating"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            tools:backgroundTint="@color/my_green"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/RatingTitle"
+            app:layout_constraintStart_toEndOf="@+id/RatingTitle"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/MovieVoteRating"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/rock_salt"
+                android:gravity="center"
+                android:alpha="0.8"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                tools:text="8.9" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/MovieReleaseYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/roboto_mono_italic"
+            android:textSize="20sp"
+            android:textStyle="italic|bold"
+            android:alpha="0.6"
+            app:layout_constraintBaseline_toBaselineOf="@+id/RatingTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2021" />
+
+        <TextView
+            android:id="@+id/MovieOriginalLanguage"
+            style="@style/main_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:fontFamily="@font/merienda_one"
+            app:layout_constraintBaseline_toBaselineOf="@+id/RatingTitle"
+            app:layout_constraintEnd_toStartOf="@+id/MovieReleaseYear"
+            app:layout_constraintStart_toEndOf="@+id/CardViewMovieRating"
+            tools:text="EN" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.cardview.widget.CardView>
