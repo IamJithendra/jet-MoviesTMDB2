@@ -49,13 +49,13 @@ class RecyclerAdapter(private val movies: List<Result>, private val listener: On
         holder.movieReleaseYear.text = currentItem.release_date
 
         // Animation
-        if (position % 2 == 0) {
-            holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_1)
-            Log.d("Animation", "First")
-        } else{
-            holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_2)
-            Log.d("Animation", "Second")
-        }
+//        if (position % 2 == 0) {
+//            holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_1)
+//            Log.d("Animation", "First")
+//        } else{
+//            holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_2)
+//            Log.d("Animation", "Second")
+//        }
 
         holder.voteRatingCard.animation = AnimationUtils.loadAnimation(holder.voteRatingCard.context, R.anim.rating_card_spin_animation)
 

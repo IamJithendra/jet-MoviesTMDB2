@@ -43,26 +43,29 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
         binding.RecyclerView.setHasFixedSize(true)
 
-        binding.RecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 200) {
-                    supportActionBar?.hide()
-                }
-            }
-
-            @SuppressLint("RestrictedApi")
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                when (newState){
-                    0 -> {
-                        supportActionBar?.show()
-                        supportActionBar?.setShowHideAnimationEnabled(true)
-                    }
-                }
-            }
-        })
+//        // For Hiding Action Bar
+//        binding.RecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+//
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                if (dy > 100) {
+//                    supportActionBar?.hide()
+//                }else if (dy < -100){
+//                    supportActionBar?.hide()
+//                }
+//            }
+//
+//            @SuppressLint("RestrictedApi")
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//                when (newState){
+//                    0 -> {
+//                        supportActionBar?.show()
+//                        supportActionBar?.setShowHideAnimationEnabled(true)
+//                    }
+//                }
+//            }
+//        })
         setTitle()
 
     }
@@ -84,14 +87,12 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         menuInflater.inflate(R.menu.menu_main, menu)
         val searchItem = menu?.findItem(R.id.mainMenuSearch)
 
-
-
         if (searchItem != null) {
 
             val searchView = searchItem.actionView as SearchView
-            searchView.onActionViewExpanded()
             searchView.queryHint = "Search for Movies"
             searchView.focusSearch(View.FOCUS_UP)
+            searchView.onActionViewExpanded()
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                 searchView.setQuery("",false)
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
-                searchView.clearFocus()
+
             }
 
         }
