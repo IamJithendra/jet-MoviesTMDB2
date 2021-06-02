@@ -1,17 +1,24 @@
 package com.karlis.moviestmdb
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MotionEvent
+import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
+import android.view.inputmethod.InputMethodManager
 import android.widget.ScrollView
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.annotation.RequiresApi
+import androidx.core.view.ScrollingView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -35,9 +42,31 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         binding.RecyclerView.adapter = adapter
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
         binding.RecyclerView.setHasFixedSize(true)
+
+        binding.RecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 200) {
+                    supportActionBar?.hide()
+                }
+            }
+
+            @SuppressLint("RestrictedApi")
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState){
+                    0 -> {
+                        supportActionBar?.show()
+                        supportActionBar?.setShowHideAnimationEnabled(true)
+                    }
+                }
+            }
+        })
         setTitle()
 
     }
+
 
     private fun setTitle() {
         val numberOfMovies = intent.getStringExtra("moviesCount")
@@ -54,7 +83,11 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val searchItem = menu?.findItem(R.id.mainMenuSearch)
+
+
+
         if (searchItem != null) {
+
             val searchView = searchItem.actionView as SearchView
             searchView.onActionViewExpanded()
             searchView.queryHint = "Search for Movies"
@@ -64,10 +97,12 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     Log.d("onQueryTextSubmit: ", query.toString())
-                    loadMovies(query)
-                    searchView.clearFocus()
-                    searchItem.collapseActionView()
-                    searchView.setQuery("",false)
+                    if (query != null) {
+                        loadMovies(query)
+                        searchView.clearFocus()
+                        searchItem.collapseActionView()
+                        searchView.setQuery("",false)
+                    }
                     return true
                 }
 
@@ -75,10 +110,20 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                     Log.d("OnQueryTextChange: ", newText.toString())
                     return true
                 }
+
             })
+
+            searchView.setOnQueryTextFocusChangeListener { v, _ ->
+                searchView.setQuery("",false)
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                searchView.clearFocus()
+            }
+
         }
         return super.onCreateOptionsMenu(menu)
     }
+
 
     private fun loadMovies(query: String?) {
         var listOfMovies: ArrayList<Result> = ArrayList()
@@ -145,6 +190,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         )
         Volley.newRequestQueue(this).add(volleyStringRequest)
     }
+
 
 
 }

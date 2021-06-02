@@ -1,11 +1,9 @@
 package com.karlis.moviestmdb
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Parcelable
 import android.util.Log
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -13,16 +11,12 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.karlis.moviestmdb.utils.Constants.Constants.Companion.API_KEY
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.math.RoundingMode
-import kotlin.math.log
 
 class LoadingScreen : AppCompatActivity() {
 
@@ -52,7 +46,7 @@ class LoadingScreen : AppCompatActivity() {
             intent.putExtra("moviesCount", numberOfMovies)
             startActivity(intent)
             finish()
-        }, 4600)
+        }, 4500)
     }
 
     private fun loadMovies(page: Int) {
@@ -117,7 +111,7 @@ class LoadingScreen : AppCompatActivity() {
         credentials.animation = AnimationUtils.loadAnimation(credentials.context, R.anim.fade_in)
 
         val startProgressBar: ProgressBar = findViewById(R.id.launchScreenProgressBar)
-        startProgressBar.animation = AnimationUtils.loadAnimation(startProgressBar.context, R.anim.blink)
+        startProgressBar.animation = AnimationUtils.loadAnimation(startProgressBar.context, R.anim.change_alpha)
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,

@@ -23,6 +23,7 @@ import com.karlis.moviestmdb.databinding.ActivityDetailScreenBinding
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 import java.math.RoundingMode
+import kotlin.properties.Delegates
 
 class DetailScreen : AppCompatActivity() {
     private lateinit var binding: ActivityDetailScreenBinding
@@ -58,6 +59,7 @@ class DetailScreen : AppCompatActivity() {
         animateViews()
         changeAppearance()
         starAnimation()
+
 
 
     }
@@ -159,11 +161,11 @@ class DetailScreen : AppCompatActivity() {
     }
 
     private fun starAnimation(){
-        star1.animation = AnimationUtils.loadAnimation(star1.context, R.anim.blinking_star1)
-        star2.animation = AnimationUtils.loadAnimation(star2.context, R.anim.blinking_star2)
-        star3.animation = AnimationUtils.loadAnimation(star3.context, R.anim.blinking_star3)
-        star4.animation = AnimationUtils.loadAnimation(star4.context, R.anim.blinking_star2)
-        star5.animation = AnimationUtils.loadAnimation(star5.context, R.anim.blinking_star1)
+            star1.animation = AnimationUtils.loadAnimation(star1.context, R.anim.blinking_star1)
+            star2.animation = AnimationUtils.loadAnimation(star2.context, R.anim.blinking_star2)
+            star3.animation = AnimationUtils.loadAnimation(star3.context, R.anim.blinking_star3)
+            star4.animation = AnimationUtils.loadAnimation(star4.context, R.anim.blinking_star4)
+            star5.animation = AnimationUtils.loadAnimation(star5.context, R.anim.blinking_star5)
     }
 
     private fun bindCards() {
@@ -187,7 +189,6 @@ class DetailScreen : AppCompatActivity() {
     }
 
 
-
     @SuppressLint("ResourceType")
     private fun loadMovieDescription(id: String) {
         val apiKey = "73619d549f33ccdf0116452a1f3f9427"
@@ -200,12 +201,12 @@ class DetailScreen : AppCompatActivity() {
                 val resultJson = JSONObject(response)
 
                 //Lambda 1
-                val getItem: (String) -> String? = { item ->
-                    val numberOfGenres = resultJson.getJSONArray("$item").length()
+                val getItem: (String) -> String? = {
+                    val numberOfGenres = resultJson.getJSONArray(it).length()
                     val listOfGenres: ArrayList<String> = ArrayList()
                     var counter = 1
                     for (genreIndex in 0 until numberOfGenres) {
-                        val newGenre = resultJson.getJSONArray("$item").getJSONObject(genreIndex)
+                        val newGenre = resultJson.getJSONArray(it).getJSONObject(genreIndex)
                             .getString("name")
                         listOfGenres.add("$counter) $newGenre")
                         counter += 1
@@ -214,8 +215,8 @@ class DetailScreen : AppCompatActivity() {
                 }
 
                 // Lambda 2
-                val getStringFromJson: (String) -> String? = { item ->
-                    resultJson.getString("$item")
+                val getStringFromJson: (String) -> String? = {
+                    resultJson.getString(it)
                 }
 
                 this.title = getStringFromJson("title") // Action Bar Title
@@ -223,11 +224,20 @@ class DetailScreen : AppCompatActivity() {
                 // textView
                 binding.DetailTitle.text = getStringFromJson("title")
                 binding.DetailStatus.text = getStringFromJson("status")
-                binding.DetailVoteAverage.text = getStringFromJson("vote_average")?.toDouble().toString()
                 binding.DetailReleaseDate.text = getStringFromJson("release_date")
-                binding.DetailOverviewText.text = getStringFromJson("overview")
                 binding.DetailOriginalLanguage.text = getStringFromJson("original_language")?.uppercase()
                 setStarImages(getStringFromJson("vote_average")!!)
+                binding.DetailVoteAverage.text = getStringFromJson("vote_average")?.toDouble().toString()
+
+
+
+                when (getStringFromJson("overview")){
+                    "" -> {
+                        binding.DetailOverviewText.isVisible = false
+                        binding.DetailOverviewTitle.isVisible = false
+                    }
+                    else -> binding.DetailOverviewText.text = getStringFromJson("overview")
+                }
 
                 when (getStringFromJson("tagline")){
                     "" -> binding.DetailTagline.isVisible = false
@@ -235,8 +245,22 @@ class DetailScreen : AppCompatActivity() {
                 }
 
                 binding.DetailGenre.text = getItem("genres")
-                binding.DetailProductionCompanies.text = getItem("production_companies")
-                binding.DetailProductionCountries.text = getItem("production_countries")
+
+                when (getItem("production_companies")){
+                    "" -> {
+                        binding.DetailProductionCompanies.isVisible = false
+                        binding.DetailProductionCompaniesTitle.isVisible = false
+                    }
+                    else -> binding.DetailProductionCompanies.text = getItem("production_companies")
+                }
+
+                when (getItem("production_countries")) {
+                    "" -> {
+                        binding.DetailProductionCountries.isVisible = false
+                        binding.DetailProductionCountriesTitle.isVisible = false
+                    }
+                    else -> binding.DetailProductionCountries.text = getItem("production_countries")
+                }
 
                 // GET YouTube Video ID
                 try {

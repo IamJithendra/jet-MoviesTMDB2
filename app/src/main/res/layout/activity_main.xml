@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:layout_scrollFlags="scroll|enterAlways"
     android:id="@+id/MainScrollView"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:orientation="vertical"
         app:layout_editor_absoluteX="0dp"
         app:layout_editor_absoluteY="0dp"
-        tools:listitem="@layout/movies_row_item"/>
+        tools:listitem="@layout/movies_row_item" />
 
 </ScrollView>

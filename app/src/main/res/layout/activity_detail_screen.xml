@@ -15,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/DetailBackdropPathCardView"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="220dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -249,13 +249,15 @@
                     android:id="@+id/DetailOverviewText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:fontFamily="@font/montserrat"
-                    android:justificationMode="inter_word"
-                    android:textStyle="italic"
+                    android:layout_marginEnd="5dp"
                     android:alpha="0.6"
+                    android:padding="1dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textStyle="italic"
+                    android:justificationMode="inter_word"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toTopOf="@id/DetailProductionCompaniesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -267,15 +269,16 @@
                     android:id="@+id/DetailProductionCompaniesTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="left"
                     android:text="@string/production_companies"
                     android:fontFamily="@font/cinzel_black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/DetailOverviewText"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/DetailOverviewText"
                     tools:ignore="RtlHardcoded" />
 
@@ -335,9 +338,9 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:orientation="horizontal">
                         <ImageView
                             android:id="@+id/details_star1"

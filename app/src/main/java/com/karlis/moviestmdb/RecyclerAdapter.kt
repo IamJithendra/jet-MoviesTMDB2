@@ -51,17 +51,20 @@ class RecyclerAdapter(private val movies: List<Result>, private val listener: On
         // Animation
         if (position % 2 == 0) {
             holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_1)
-        }else{
+            Log.d("Animation", "First")
+        } else{
             holder.rowCard.animation = AnimationUtils.loadAnimation(holder.rowCard.context, R.anim.row_item_animation_2)
+            Log.d("Animation", "Second")
         }
+
         holder.voteRatingCard.animation = AnimationUtils.loadAnimation(holder.voteRatingCard.context, R.anim.rating_card_spin_animation)
 
         //Star Animation
         holder.star1.animation = AnimationUtils.loadAnimation(holder.star1.context, R.anim.blinking_star1)
         holder.star2.animation = AnimationUtils.loadAnimation(holder.star2.context, R.anim.blinking_star2)
         holder.star3.animation = AnimationUtils.loadAnimation(holder.star3.context, R.anim.blinking_star3)
-        holder.star4.animation = AnimationUtils.loadAnimation(holder.star4.context, R.anim.blinking_star2)
-        holder.star5.animation = AnimationUtils.loadAnimation(holder.star5.context, R.anim.blinking_star1)
+        holder.star4.animation = AnimationUtils.loadAnimation(holder.star4.context, R.anim.blinking_star4)
+        holder.star5.animation = AnimationUtils.loadAnimation(holder.star5.context, R.anim.blinking_star5)
 
         // Appearance
         holder.rowCard.setCardBackgroundColor(Color.argb(15,104,121,128))

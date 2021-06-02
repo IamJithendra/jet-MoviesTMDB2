@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
 
-<!--    <translate-->
-<!--        android:fromYDelta="-150%"-->
-<!--        android:toYDelta="0"-->
-<!--        android:fromXDelta="-150%"-->
-<!--        android:toXDelta="0"-->
-<!--        android:duration="2500"-->
-<!--        />-->
+    <set android:fillBefore="true"
+        android:startOffset="500">
+        <translate
+            android:fromXDelta="100%"
+            android:toXDelta="0"
+            android:duration="3500"/>
+    </set>
+    <set>
+        <scale
+            android:pivotX="0%"
+            android:pivotY="0%"
+            android:fromXScale="0"
+            android:fromYScale="0"
+            android:toXScale="1"
+            android:toYScale="1"
+            android:duration="3500"/>
 
-    <rotate
-        android:pivotY="50%"
-        android:pivotX="50%"
-        android:fromDegrees="2160"
-        android:toDegrees="0"
-        android:duration="3500"/>
+        <alpha
+            android:fromAlpha="0"
+            android:toAlpha="1.0"
+            android:duration="3500"/>
+    </set>
 
 
-    <scale
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:fromXScale="-0.5"
-        android:fromYScale="-0.5"
-        android:toXScale="1"
-        android:toYScale="1"
-        android:repeatMode="reverse"
-        android:repeatCount="2"
-        android:duration="1100"/>
-
-    <alpha
-        android:fromAlpha="0"
-        android:toAlpha="1.0"
-        android:repeatMode="reverse"
-        android:repeatCount="2"
-        android:duration="1600"/>
 </set>

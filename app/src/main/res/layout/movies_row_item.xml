@@ -8,6 +8,7 @@
     android:layout_margin="4dp"
     android:id="@+id/MoviesCardViewItem"
     app:cardElevation="0dp"
+    android:orientation="vertical"
     app:cardUseCompatPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
