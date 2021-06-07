@@ -20,8 +20,8 @@ import java.math.RoundingMode
 
 class LoadingScreen : AppCompatActivity() {
 
-    private var movieList: ArrayList<Result> = ArrayList()
-    private lateinit var movie: Result
+    private var movieList: ArrayList<MoviesDetails> = ArrayList()
+    private lateinit var movie: MoviesDetails
     private var numberOfMovies: String = String()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +32,7 @@ class LoadingScreen : AppCompatActivity() {
         for (i in 1 .. 5){
             loadMovies(i)
         }
+//        loadMovies(1)
 
         loadAnimations()
         loadRecycleView()
@@ -80,7 +81,7 @@ class LoadingScreen : AppCompatActivity() {
 
                     for (i in 0 until numberOfMoviesInPage){
                         // To Object
-                        movie = Result(
+                        movie = MoviesDetails(
                             id = getItemFromJsonArray("id",i),
                             original_language = getItemFromJsonArray("original_language",i).uppercase(),
                             popularity = roundNumber(getItemFromJsonArray("popularity",i)),
@@ -100,7 +101,6 @@ class LoadingScreen : AppCompatActivity() {
             )
             Volley.newRequestQueue(this).add(volleyStringRequest)
     }
-
 
     private fun loadAnimations() {
         val logo: ImageView = findViewById(R.id.LaunchScreenLogo)

@@ -11,30 +11,41 @@ import com.karlis.moviestmdb.databinding.ActivitySearchResultsBinding
 class SearchResults : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivitySearchResultsBinding
-    private lateinit var moviesList: ArrayList<Result>
+    private lateinit var moviesDetailsList: ArrayList<MoviesDetails>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchResultsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        showBackButton()
+        setTitleForSearchItem()
+        getMovieListSearchResults()
+        setUpRecyclerView()
+    }
 
+    private fun showBackButton() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setTitleForSearchItem() {
         val searchKey = intent.getStringExtra("Keyword")
-
         this.title = "Search results for: \"${searchKey}\""
+    }
 
-        moviesList = intent.getSerializableExtra("Search") as ArrayList<Result>
-        Log.d("Movies List --..", moviesList.toString())
-        val adapter = RecyclerAdapter(moviesList as List<Result>, this)
+    private fun getMovieListSearchResults() {
+        moviesDetailsList = intent.getSerializableExtra("Search") as ArrayList<MoviesDetails>
+    }
+
+    private fun setUpRecyclerView() {
+        val adapter = RecyclerAdapter(moviesDetailsList, this)
         binding.RecyclerView.adapter = adapter
         binding.RecyclerView.layoutManager = LinearLayoutManager(this)
         binding.RecyclerView.setHasFixedSize(true)
-
     }
 
     override fun onItemClick(position: Int) {
-        val clickedItem: Result = moviesList[position]
+        val clickedItem: MoviesDetails = moviesDetailsList[position]
         val intent = Intent(this, DetailScreen::class.java)
         intent.putExtra("movie_id", clickedItem.id)
         startActivity(intent)

@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
@@ -49,11 +50,9 @@ class DetailScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        movieId = intent.getStringExtra("movie_id").toString()
-        loadMovieDescription(id = movieId)
-
+        showBackButton()
+        getMovie()
         bindCards()
         bindStars()
         animateViews()
@@ -62,6 +61,15 @@ class DetailScreen : AppCompatActivity() {
 
 
 
+    }
+
+    private fun getMovie() {
+        movieId = intent.getStringExtra("movie_id").toString()
+        loadMovieDescription(id = movieId)
+    }
+
+    private fun showBackButton() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun bindStars() {
@@ -226,41 +234,38 @@ class DetailScreen : AppCompatActivity() {
                 binding.DetailStatus.text = getStringFromJson("status")
                 binding.DetailReleaseDate.text = getStringFromJson("release_date")
                 binding.DetailOriginalLanguage.text = getStringFromJson("original_language")?.uppercase()
-                setStarImages(getStringFromJson("vote_average")!!)
                 binding.DetailVoteAverage.text = getStringFromJson("vote_average")?.toDouble().toString()
-
-
-
-                when (getStringFromJson("overview")){
-                    "" -> {
-                        binding.DetailOverviewText.isVisible = false
-                        binding.DetailOverviewTitle.isVisible = false
-                    }
-                    else -> binding.DetailOverviewText.text = getStringFromJson("overview")
-                }
-
-                when (getStringFromJson("tagline")){
-                    "" -> binding.DetailTagline.isVisible = false
-                    else -> binding.DetailTagline.text = getStringFromJson("tagline")
-                }
-
                 binding.DetailGenre.text = getItem("genres")
+                binding.DetailOverviewText.text = getStringFromJson("overview")
+                binding.DetailTagline.text = getStringFromJson("tagline")
+                binding.DetailProductionCompanies.text = getItem("production_companies")
+                binding.DetailProductionCountries.text = getItem("production_countries")
 
-                when (getItem("production_companies")){
-                    "" -> {
-                        binding.DetailProductionCompanies.isVisible = false
-                        binding.DetailProductionCompaniesTitle.isVisible = false
-                    }
-                    else -> binding.DetailProductionCompanies.text = getItem("production_companies")
+                // Rating Stars
+                setStarImages(getStringFromJson("vote_average")!!)
+
+                // Set Visibility
+                val isEmptyCheck: (String) -> Boolean = {
+                    getStringFromJson(it) != ""
                 }
 
-                when (getItem("production_countries")) {
-                    "" -> {
-                        binding.DetailProductionCountries.isVisible = false
-                        binding.DetailProductionCountriesTitle.isVisible = false
-                    }
-                    else -> binding.DetailProductionCountries.text = getItem("production_countries")
+                val isEmptyCheck2: (String) -> Boolean = {
+                    getItem(it) != ""
                 }
+
+                binding.DetailOverviewText.isVisible = isEmptyCheck("overview")
+                binding.DetailOverviewTitle.isVisible = isEmptyCheck("overview")
+
+                binding.DetailTagline.isVisible = isEmptyCheck("tagline")
+
+                binding.DetailReleaseDateTitle.isVisible = isEmptyCheck("release_date")
+                binding.DetailReleaseDate.isVisible = isEmptyCheck("release_date")
+
+                binding.DetailProductionCompanies.isVisible = isEmptyCheck2("production_companies")
+                binding.DetailProductionCompaniesTitle.isVisible = isEmptyCheck2("production_companies")
+
+                binding.DetailProductionCountries.isVisible = isEmptyCheck2("production_countries")
+                binding.DetailProductionCountriesTitle.isVisible = isEmptyCheck2("production_countries")
 
                 // GET YouTube Video ID
                 try {
@@ -273,6 +278,7 @@ class DetailScreen : AppCompatActivity() {
                 loadImage(imagePath = resultJson.getString("poster_path"), inTo = binding.DetailPoster)
                 loadImage(imagePath = resultJson.getString("backdrop_path"), inTo = binding.DetailBackdropPath)
 
+                // Appearance
                 binding.DetailPosterCardView.setCardBackgroundColor(Color.argb(15,104,121,128))
                 binding.DetailBackdropPathCardView.setCardBackgroundColor(Color.argb(15,104,121,128))
 
@@ -291,17 +297,21 @@ class DetailScreen : AppCompatActivity() {
         * videoTrailerId (Optional) - Default (null)
         */
         try {
-            val tmdbHomepage = "https://www.themoviedb.org/movie/$movieID"
-            val youTubeLink = "https://www.youtube.com/watch?v=$videoTrailerId"
-
             val openURL = Intent(Intent.ACTION_VIEW)
-            if (page == "TMDB"){
-                openURL.data = Uri.parse(tmdbHomepage)
-            }else if (page == "YouTube") {
-                openURL.data = Uri.parse(youTubeLink)
+            when(page){
+                "TMDB" -> {
+                    val tmdbHomepage = "https://www.themoviedb.org/movie/$movieID"
+                    openURL.data = Uri.parse(tmdbHomepage)
+                }
+                "YouTube" -> {
+                    val youTubeLink = "https://www.youtube.com/watch?v=$videoTrailerId"
+                    openURL.data = Uri.parse(youTubeLink)
+                }
             }
+
             Toast.makeText(this, "Redirecting you to $page", Toast.LENGTH_SHORT)
                 .show()
+
             startActivity(openURL)
         } catch (error: ActivityNotFoundException) {
             Log.d("Error Message:", error.message.toString())
@@ -339,22 +349,25 @@ class DetailScreen : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d("BUTTON", item.toString())
-        if (item.toString() == "Homepage") {
-            openUrl(movieID = this.movieId, page = "TMDB")
-        }else if(item.toString() == "YouTube") {
-            try {
-                openUrl(videoTrailerId = this.videoTrailerId, page = "YouTube")
-            } catch (e: AndroidRuntimeException){
-                Log.d("Youtube link error:", e.message.toString())
-            }
 
-        } else {
-            when (item.itemId) {
-                android.R.id.home -> {
-                    finish()
-                    return true
+        when (item.toString()){
+            "Homepage" -> openUrl(movieID = this.movieId, page = "TMDB")
+            "YouTube" -> {
+                try {
+                    openUrl(videoTrailerId = this.videoTrailerId, page = "YouTube")
+                } catch (e: AndroidRuntimeException){
+                    Log.d("Youtube link error:", e.message.toString())
                 }
             }
+            else -> {
+                when (item.itemId) {
+                    android.R.id.home -> {
+                        finish()
+                        return true
+                    }
+                }
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }

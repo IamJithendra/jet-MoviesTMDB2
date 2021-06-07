@@ -2,7 +2,7 @@ package com.karlis.moviestmdb
 
 import java.io.Serializable
 
-data class Result(
+data class MoviesDetails(
     val id: String,
     val original_language: String,
     val popularity: String,

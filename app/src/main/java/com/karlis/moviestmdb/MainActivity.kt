@@ -3,20 +3,17 @@ package com.karlis.moviestmdb
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.ScrollView
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.view.ScrollingView
+import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -30,46 +27,56 @@ import java.math.RoundingMode
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var moviesList: ArrayList<Result>
+    private lateinit var moviesDetailsList: ArrayList<MoviesDetails>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        moviesList = intent.getSerializableExtra("movies") as ArrayList<Result>
-        val adapter = RecyclerAdapter(moviesList as List<Result>, this)
-        binding.RecyclerView.adapter = adapter
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.RecyclerView.setHasFixedSize(true)
-
-//        // For Hiding Action Bar
-//        binding.RecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-//
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if (dy > 100) {
-//                    supportActionBar?.hide()
-//                }else if (dy < -100){
-//                    supportActionBar?.hide()
-//                }
-//            }
-//
-//            @SuppressLint("RestrictedApi")
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                when (newState){
-//                    0 -> {
-//                        supportActionBar?.show()
-//                        supportActionBar?.setShowHideAnimationEnabled(true)
-//                    }
-//                }
-//            }
-//        })
+        getMoviesListObjects()
+        setRecyclerView()
         setTitle()
 
     }
 
+    private fun getMoviesListObjects(){
+        moviesDetailsList = intent.getSerializableExtra("movies") as ArrayList<MoviesDetails>
+        moviesDetailsList.sortByDescending { it.vote_average.toDouble() }
+
+    }
+
+    private fun setRecyclerView() {
+        val adapter = RecyclerAdapter(moviesDetailsList, this)
+        val recycler = binding.RecyclerView
+        recycler.adapter = adapter
+        recycler.isNestedScrollingEnabled = false
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.setHasFixedSize(true)
+
+        recycler.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 110 || dy < -110){
+                    binding.MainProgressBar.visibility = View.VISIBLE
+                }else{
+                    binding.MainProgressBar.visibility = View.GONE
+                }
+            }
+
+            @SuppressLint("RestrictedApi")
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when(newState){
+                    0 -> {
+                        binding.MainProgressBar.visibility = View.GONE
+                    }
+
+                }
+            }
+        })
+    }
 
     private fun setTitle() {
         val numberOfMovies = intent.getStringExtra("moviesCount")
@@ -77,7 +84,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        val clickedItem: Result = moviesList[position]
+        val clickedItem: MoviesDetails = moviesDetailsList[position]
         val intent = Intent(this, DetailScreen::class.java)
         intent.putExtra("movie_id", clickedItem.id)
         startActivity(intent)
@@ -125,9 +132,8 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-
     private fun loadMovies(query: String?) {
-        var listOfMovies: ArrayList<Result> = ArrayList()
+        var listOfMovies: ArrayList<MoviesDetails> = ArrayList()
         val apiKey = "73619d549f33ccdf0116452a1f3f9427"
         val urlString =
             "https://api.themoviedb.org/3/search/movie?api_key=$apiKey&language=en-US&query=$query&page=1&include_adult=false"
@@ -144,7 +150,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                         .toInt()
                         .toString()
                 }
-                val myMovie = MainMovies(
+                val myMovie = Data(
                     results = resultJson.getJSONArray("results")
                 )
                 val moviesTotal = myMovie.results.length()
@@ -155,6 +161,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                 }
 
                 for (index in 0 until moviesTotal) {
+
                     // Lambda 1
                     val getStringFromJson: (String) -> String? = { item ->
                         try {
@@ -165,7 +172,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                         }.toString()
                     }
 
-                    val movie = Result(
+                    val movie = MoviesDetails(
                         title = getStringFromJson("title")!!,
                         poster_path = "https://image.tmdb.org/t/p/w500${getStringFromJson("poster_path")!!}",
                         vote_average = getStringFromJson("vote_average")!!.toDouble().toString(),
