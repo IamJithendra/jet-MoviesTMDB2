@@ -8,4 +8,10 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.widget.SearchView"
         />
+
+    <item
+        android:id="@+id/FavoritePage"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        app:showAsAction="ifRoom" />
 </menu>

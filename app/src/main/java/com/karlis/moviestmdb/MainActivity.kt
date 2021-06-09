@@ -7,13 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -22,9 +20,10 @@ import com.android.volley.toolbox.Volley
 import com.karlis.moviestmdb.databinding.ActivityMainBinding
 import org.json.JSONException
 import org.json.JSONObject
+import java.lang.IndexOutOfBoundsException
 import java.math.RoundingMode
 
-class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), RecyclerAdapterList.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var moviesDetailsList: ArrayList<MoviesDetails>
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     }
 
+
     private fun getMoviesListObjects(){
         moviesDetailsList = intent.getSerializableExtra("movies") as ArrayList<MoviesDetails>
         moviesDetailsList.sortByDescending { it.vote_average.toDouble() }
@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     }
 
     private fun setRecyclerView() {
-        val adapter = RecyclerAdapter(moviesDetailsList, this)
-        val recycler = binding.RecyclerView
+        val adapter = RecyclerAdapterList(moviesDetailsList, this)
+        val recycler = binding.MainRecyclerView
         recycler.adapter = adapter
         recycler.isNestedScrollingEnabled = false
         recycler.layoutManager = LinearLayoutManager(this)
@@ -130,6 +130,74 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.toString()){
+            "Favorites" -> {
+                val intent = Intent(this, FavoritesScreen::class.java)
+                intent.putExtra("fromDB", getDataFromSql())
+                getDataFromSql()
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    @SuppressLint("Recycle")
+    private fun getDataFromSql(): ArrayList<MoviesDetails> {
+
+        val fromDB: ArrayList<MoviesDetails> = ArrayList()
+
+        var id = String()
+        var lang = String()
+        var popularity = String()
+        var posterLink = String()
+        var releaseDate = String()
+        var movTitle = String()
+        var rating = String()
+
+        val helper = MyDBHelper(applicationContext)
+        val db = helper.readableDatabase
+        val rs = db.rawQuery("SELECT * FROM MOVIES", null)
+
+        Log.d("Items in SQL:", rs.count.toString())
+        Log.d("Column Count:", rs.columnCount.toString())
+
+        if (rs.moveToFirst() && rs.columnCount >= 1){
+            var isItem = true
+            while (isItem){
+                try {
+                    id = rs.getString(1)
+                    lang = rs.getString(2)
+                    popularity = rs.getString(3)
+                    posterLink = "https://image.tmdb.org/t/p/w500${rs.getString(4)}"
+                    releaseDate = rs.getString(5)
+                    movTitle = rs.getString(6)
+                    rating = rs.getString(7)
+                } catch (e: IndexOutOfBoundsException){
+                    println(e)
+                }
+                val favoriteMovie = MoviesDetails(
+                    id = id,
+                    original_language = lang,
+                    popularity = popularity,
+                    poster_path = posterLink,
+                    release_date = releaseDate,
+                    title = movTitle,
+                    vote_average = rating
+                )
+                fromDB.add(favoriteMovie)
+                if (rs.isLast){
+                    isItem = false
+                } else {
+                    rs.moveToNext()
+                }
+            }
+        }
+
+        Log.d("Favorite DB (Size):", fromDB.size.toString())
+        return fromDB
     }
 
     private fun loadMovies(query: String?) {

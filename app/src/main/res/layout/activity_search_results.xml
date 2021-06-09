@@ -8,12 +8,12 @@
     tools:context=".SearchResults">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerView"
+        android:id="@+id/MainRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         app:layout_editor_absoluteX="0dp"
         app:layout_editor_absoluteY="0dp"
-        tools:listitem="@layout/movies_row_item"/>
+        tools:listitem="@layout/movies_row_list_item"/>
 
 </ScrollView>

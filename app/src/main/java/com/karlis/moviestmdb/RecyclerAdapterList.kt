@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.AbsListView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -15,19 +14,16 @@ import com.squareup.picasso.Picasso
 import java.lang.Exception
 import java.math.RoundingMode
 
-class RecyclerAdapter(private val movies: ArrayList<MoviesDetails>, private val listener: OnItemClickListener) : RecyclerView.Adapter<RecyclerAdapter.MovieViewHolder>() {
+class RecyclerAdapterList(private val movies: ArrayList<MoviesDetails>, private val listener: OnItemClickListener) : RecyclerView.Adapter<RecyclerAdapterList.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movies_row_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movies_row_list_item, parent, false)
         return MovieViewHolder(itemView)
     }
 
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerAdapterList.MovieViewHolder, position: Int) {
         val currentItem = movies[position]
-
-
-
         // Image
         Picasso
             .get()
@@ -216,7 +212,6 @@ class RecyclerAdapter(private val movies: ArrayList<MoviesDetails>, private val 
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
             }
-
         }
     }
 

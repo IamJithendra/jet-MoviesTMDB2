@@ -3,12 +3,11 @@ package com.karlis.moviestmdb
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.karlis.moviestmdb.databinding.ActivitySearchResultsBinding
 
-class SearchResults : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
+class SearchResults : AppCompatActivity(), RecyclerAdapterList.OnItemClickListener {
 
     private lateinit var binding: ActivitySearchResultsBinding
     private lateinit var moviesDetailsList: ArrayList<MoviesDetails>
@@ -38,10 +37,10 @@ class SearchResults : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     }
 
     private fun setUpRecyclerView() {
-        val adapter = RecyclerAdapter(moviesDetailsList, this)
-        binding.RecyclerView.adapter = adapter
-        binding.RecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.RecyclerView.setHasFixedSize(true)
+        val adapter = RecyclerAdapterList(moviesDetailsList, this)
+        binding.MainRecyclerView.adapter = adapter
+        binding.MainRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.MainRecyclerView.setHasFixedSize(true)
     }
 
     override fun onItemClick(position: Int) {

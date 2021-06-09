@@ -2,6 +2,7 @@ package com.karlis.moviestmdb
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -29,6 +30,7 @@ import kotlin.properties.Delegates
 class DetailScreen : AppCompatActivity() {
     private lateinit var binding: ActivityDetailScreenBinding
     private lateinit var movieId: String
+    private lateinit var listOfParams: ArrayList<String>
     private var videoTrailerId: String? = null
 
     // Card
@@ -199,6 +201,7 @@ class DetailScreen : AppCompatActivity() {
 
     @SuppressLint("ResourceType")
     private fun loadMovieDescription(id: String) {
+        listOfParams = ArrayList()
         val apiKey = "73619d549f33ccdf0116452a1f3f9427"
         val appendToResponse = "&append_to_response=videos"
         val urlString = "https://api.themoviedb.org/3/movie/$id?api_key=$apiKey$appendToResponse"
@@ -240,6 +243,14 @@ class DetailScreen : AppCompatActivity() {
                 binding.DetailTagline.text = getStringFromJson("tagline")
                 binding.DetailProductionCompanies.text = getItem("production_companies")
                 binding.DetailProductionCountries.text = getItem("production_countries")
+
+                listOfParams.add(binding.DetailOriginalLanguage.text.toString())
+                listOfParams.add(getStringFromJson("popularity")?.toDouble()?.toInt().toString())
+                listOfParams.add(getStringFromJson("poster_path").toString())
+                listOfParams.add(binding.DetailReleaseDate.text.toString().take(4))
+                listOfParams.add(binding.DetailTitle.text.toString())
+                listOfParams.add(getStringFromJson("vote_average").toString())
+
 
                 // Rating Stars
                 setStarImages(getStringFromJson("vote_average")!!)
@@ -358,6 +369,21 @@ class DetailScreen : AppCompatActivity() {
                 } catch (e: AndroidRuntimeException){
                     Log.d("Youtube link error:", e.message.toString())
                 }
+            }
+            "Add to Favorites" -> {
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
+                var helper = MyDBHelper(applicationContext)
+                val db = helper.readableDatabase
+                val cv = ContentValues()
+                cv.put("ID", movieId)
+                cv.put("MOV_LANG", listOfParams[0])
+                cv.put("MOV_POP", listOfParams[1])
+                cv.put("MOV_PP", listOfParams[2])
+                cv.put("MOV_RD", listOfParams[3])
+                cv.put("MOV_TITLE", listOfParams[4])
+                cv.put("MOV_VOTE", listOfParams[5])
+                db.insert("MOVIES", null, cv)
+
             }
             else -> {
                 when (item.itemId) {
