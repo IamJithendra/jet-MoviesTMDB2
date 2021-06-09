@@ -82,7 +82,7 @@
         <tbody>
             <tr>
                 <td><img src="./dark/8.jpg" alt="Splash Screen" width="240"></td>
-                <td><img src="./dark/9.png" alt="Splash Screen" width="460"></td>
+                <td><img src="./dark/9.png" alt="Splash Screen" width="600"></td>
             </tr>
         </tbody>
     </table>
