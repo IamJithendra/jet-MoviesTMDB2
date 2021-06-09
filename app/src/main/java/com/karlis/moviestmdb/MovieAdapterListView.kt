@@ -90,7 +90,7 @@ class MovieAdapterListView(private val context: Activity, private val arrayList:
         star5.animation = AnimationUtils.loadAnimation(star5.context, R.anim.blinking_star5)
 
         // Appearance
-        rowCard.setCardBackgroundColor(Color.argb(15,104,121,128))
+        rowCard.setCardBackgroundColor(Color.argb(0,104,121,128))
         voteRatingCard.setCardBackgroundColor(Color.argb(100, 91,138,114))
         posterCard.setCardBackgroundColor(Color.argb(15,104,121,128))
         startRatingCard.setCardBackgroundColor(Color.argb(0,104,121,128))

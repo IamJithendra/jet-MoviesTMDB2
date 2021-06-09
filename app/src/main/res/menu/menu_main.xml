@@ -13,5 +13,5 @@
         android:id="@+id/FavoritePage"
         android:title="@string/favorites"
         android:icon="@drawable/ic_baseline_favorite_24"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
 </menu>

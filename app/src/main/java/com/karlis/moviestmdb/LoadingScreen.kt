@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.karlis.moviestmdb.databinding.ActivityLoadingScreenBinding
 import com.karlis.moviestmdb.utils.Constants.Constants.Companion.API_KEY
 import org.json.JSONException
 import org.json.JSONObject
@@ -24,17 +25,18 @@ class LoadingScreen : AppCompatActivity() {
     private lateinit var movie: MoviesDetails
     private var numberOfMovies: String = String()
 
+    private lateinit var binding: ActivityLoadingScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loading_screen)
+        binding = ActivityLoadingScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
+        loadAnimations()
         for (i in 1 .. 5){
             loadMovies(i)
         }
-//        loadMovies(1)
 
-        loadAnimations()
         loadRecycleView()
 
     }
@@ -103,14 +105,13 @@ class LoadingScreen : AppCompatActivity() {
     }
 
     private fun loadAnimations() {
-        val logo: ImageView = findViewById(R.id.LaunchScreenLogo)
+        val logo: ImageView = binding.LaunchScreenLogo
         logo.animation = AnimationUtils.loadAnimation(logo.context, R.anim.launch_screen_animation)
 
-
-        val credentials: TextView = findViewById(R.id.credentials)
+        val credentials: TextView = binding.credentials
         credentials.animation = AnimationUtils.loadAnimation(credentials.context, R.anim.fade_in)
 
-        val startProgressBar: ProgressBar = findViewById(R.id.launchScreenProgressBar)
+        val startProgressBar: ProgressBar = binding.launchScreenProgressBar
         startProgressBar.animation = AnimationUtils.loadAnimation(startProgressBar.context, R.anim.change_alpha)
 
         window.setFlags(
