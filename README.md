@@ -72,6 +72,36 @@
         </tbody>
     </table>
 <hr>
+    <table cellspacing="10">
+        <thead>
+            <tr>
+                <th>Favorites View</th>
+                <th>Saved Items In SQL DB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="./dark/8.jpg" alt="Splash Screen" width="240"></td>
+                <td><img src="./dark/9.png" alt="Splash Screen" width="460"></td>
+            </tr>
+        </tbody>
+    </table>
+<hr>
+    <table cellspacing="10">
+        <thead>
+            <tr>
+                <th>Favorite View</th>
+                <th>Save Item (Favorites)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="./gif/fav_list.gif" alt="Splash Screen" width="280"></td>
+                <td><img src="./gif/fav_save.gif" alt="Splash Screen" width="280"></td>
+            </tr>
+        </tbody>
+    </table>
+<hr>
 <h3>APIs and Frameworks</h3>
   <ul>
     <li>
