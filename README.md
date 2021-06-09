@@ -107,8 +107,8 @@
         </thead>
         <tbody>
             <tr>
-                <td><img src="./gif/fav_list.gif" alt="Splash Screen" width="280"></td>
-                <td><img src="./gif/fav_save.gif" alt="Splash Screen" width="280"></td>
+                <td><img src="./gif/fav_list.gif" alt="Splash Screen" width="320"></td>
+                <td><img src="./gif/fav_save.gif" alt="Splash Screen" width="320"></td>
             </tr>
         </tbody>
     </table>
