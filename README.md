@@ -1,5 +1,5 @@
-## TMDB Movies Application in Action (YouTube)
-[![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/q4P_pLUPEdg/0.jpg)](https://www.youtube.com/embed/q4P_pLUPEdg)
+## TMDB Movies Application in Action (YouTube) - Click on Image below!
+[![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/hGUCzzagZT8/0.jpg)](https://www.youtube.com/embed/hGUCzzagZT8)
 <td>
 <html>
 <body>
@@ -107,8 +107,23 @@
         </thead>
         <tbody>
             <tr>
-                <td><img src="./gif/fav_list.gif" alt="Splash Screen" width="320"></td>
-                <td><img src="./gif/fav_save.gif" alt="Splash Screen" width="320"></td>
+                <td><img src="./gif/fav_list.gif" alt="Favorite List" width="320"></td>
+                <td><img src="./gif/fav_save.gif" alt="Favorite Save" width="320"></td>
+            </tr>
+        </tbody>
+    </table>
+<hr>
+    <table cellspacing="10">
+        <thead>
+            <tr>
+                <th>Share Button</th>
+                <th>Sharing Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="./dark/10.jpg" alt="Share Button" width="320"></td>
+                <td><img src="./dark/11.jpg" alt="Share menu" width="320"></td>
             </tr>
         </tbody>
     </table>
