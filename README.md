@@ -85,11 +85,15 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
         <thead>
             <tr>
                 <th>Favorites View</th>
+                <th>Favorite View (ListView)</th>
+                <th>Save Item (Favorites)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><img src="./dark/8.jpg" alt="Splash Screen" width="240"></td>
+                <td><img src="./dark/8.jpg" alt="Favorits View" width="260"></td>
+                <td><img src="./gif/fav_list.gif" alt="Favorite List" width="280"></td>
+                <td><img src="./gif/fav_save.gif" alt="Favorite Save" width="280"></td>
             </tr>
         </tbody>
     </table>
@@ -103,21 +107,6 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
         <tbody>
             <tr>
                 <td><img src="./dark/9.png" alt="Splash Screen" width="1200"></td>
-            </tr>
-        </tbody>
-    </table>
-<hr>
-    <table cellspacing="10">
-        <thead>
-            <tr>
-                <th>Favorite View (ListView)</th>
-                <th>Save Item (Favorites)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><img src="./gif/fav_list.gif" alt="Favorite List" width="320"></td>
-                <td><img src="./gif/fav_save.gif" alt="Favorite Save" width="320"></td>
             </tr>
         </tbody>
     </table>
