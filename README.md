@@ -1,4 +1,4 @@
-## TMDB Movies Application in Action (YouTube)
+## TMDB Movies Application in Action (Video Presentation - YouTube)
 
 Android Movies Application using Kotlin and The Movies Database Application Programming Interface (TMDB API)
 
