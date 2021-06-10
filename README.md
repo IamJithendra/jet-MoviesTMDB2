@@ -2,12 +2,7 @@
 <html>
 <body>
 <h1>TMDB Movies Application in Action (YouTube)</h1>
-<iframe
-    width="640"
-    height="480"
-    src="https://www.youtube.com/watch?v=q4P_pLUPEdg"
-    frameborder="0" >
-</iframe>
+[![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/q4P_pLUPEdg/0.jpg)](https://www.youtube.com/embed/q4P_pLUPEdg)
     <table cellspacing="10">
         <thead>
             <tr>
