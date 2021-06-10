@@ -385,6 +385,15 @@ class DetailScreen : AppCompatActivity() {
                 db.insert("MOVIES", null, cv)
 
             }
+            "Share" -> {
+                val sharePage = "https://www.themoviedb.org/movie/${this.movieId}"
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, sharePage)
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, listOfParams[4])
+                startActivity(shareIntent)
+            }
             else -> {
                 when (item.itemId) {
                     android.R.id.home -> {

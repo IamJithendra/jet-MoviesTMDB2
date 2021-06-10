@@ -1,8 +1,16 @@
 <td>
 <html>
 <body>
-<h1>TMDB Movies Application in Action</h1>
-<p><img src="./gif/moviesApp.gif" alt="Splash Screen" width="320"></p>
+<h1>TMDB Movies Application in Action (YouTube)</h1>
+<iframe
+    width="640"
+    height="480"
+    src="https://www.youtube.com/watch?v=q4P_pLUPEdg"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+>
+</iframe>
     <table cellspacing="10">
         <thead>
             <tr>
