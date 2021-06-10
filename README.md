@@ -1,4 +1,8 @@
-## TMDB Movies Application in Action (YouTube) - Click on Image below!
+## TMDB Movies Application in Action (YouTube)
+
+Android Movies Application using Kotlin and The Movies Database Application Programming Interface (TMDB API)
+
+#### Click on Image below!
 [![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/hGUCzzagZT8/0.jpg)](https://www.youtube.com/embed/hGUCzzagZT8)
 <td>
 <html>
