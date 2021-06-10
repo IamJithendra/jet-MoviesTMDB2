@@ -110,7 +110,7 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
     <table cellspacing="10">
         <thead>
             <tr>
-                <th>Favorite View</th>
+                <th>Favorite View (ListView)</th>
                 <th>Save Item (Favorites)</th>
             </tr>
         </thead>
@@ -142,10 +142,10 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
 <h3>APIs and Frameworks</h3>
   <ul>
     <li>
-        <a href="https://developers.themoviedb.org/3/getting-started/introduction">The TMDB Movies Database API 3</a>
+        <a href="https://developers.themoviedb.org/3/getting-started/introduction">The TMDB Movies Database API 3 (Data)</a>
     </li>
     <li>
-        <a href="https://developer.android.com/training/volley">Volley Framework</a>
+        <a href="https://developer.android.com/training/volley">Volley Framework (HTTP Request)</a>
     </li>
     <li>
         <a href="https://square.github.io/picasso/">Picasso Framework (For Pictures)</a>
