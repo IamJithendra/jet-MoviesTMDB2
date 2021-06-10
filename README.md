@@ -92,8 +92,8 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
         <tbody>
             <tr>
                 <td><img src="./dark/8.jpg" alt="Favorits View" width="260"></td>
-                <td><img src="./gif/fav_list.gif" alt="Favorite List" width="280"></td>
-                <td><img src="./gif/fav_save.gif" alt="Favorite Save" width="280"></td>
+                <td><img src="./gif/fav_list.gif" alt="Favorite List" width="300"></td>
+                <td><img src="./gif/fav_save.gif" alt="Favorite Save" width="300"></td>
             </tr>
         </tbody>
     </table>
