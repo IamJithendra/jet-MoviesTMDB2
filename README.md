@@ -1,8 +1,8 @@
+##TMDB Movies Application in Action (YouTube)
+[![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/q4P_pLUPEdg/0.jpg)](https://www.youtube.com/embed/q4P_pLUPEdg)
 <td>
 <html>
 <body>
-<h1>TMDB Movies Application in Action (YouTube)</h1>
-[![Movies TMDB Demo (Youtube)](https://img.youtube.com/vi/q4P_pLUPEdg/0.jpg)](https://www.youtube.com/embed/q4P_pLUPEdg)
     <table cellspacing="10">
         <thead>
             <tr>
