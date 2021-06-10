@@ -22,6 +22,11 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
                 <td><img src="./dark/3.jpg" alt="Detail Screen" width="240"></td>
             </tr>
             <tr>
+                <th>Launch Screen(Preview)</th>
+                <th>Main Screen(Preview)</th>
+                <th>Detail Screen(Preview)</th>
+            </tr>
+            <tr>
                 <td><img src="./gif/splash_screen.gif" alt="Splash Screen" width="240"></td>
                 <td><img src="./gif/recycler_scroll.gif" alt="Splash Screen" width="240"></td>
                 <td><img src="./gif/detail_screen.gif" alt="Splash Screen" width="240"></td>
@@ -122,12 +127,14 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
             <tr>
                 <th>Share Button</th>
                 <th>Sharing Options</th>
+                <th>Sharing (In Action)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><img src="./dark/11.jpg" alt="Share Button" width="320"></td>
-                <td><img src="./dark/10.jpg" alt="Share menu" width="320"></td>
+                <td><img src="./dark/11.jpg" alt="Share Button" width="240"></td>
+                <td><img src="./dark/10.jpg" alt="Share menu" width="240"></td>
+                <td><img src="./gif/share.gif" alt="Share (In Action)" width="240"></td>
             </tr>
         </tbody>
     </table>
