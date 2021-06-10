@@ -6,10 +6,7 @@
     width="640"
     height="480"
     src="https://www.youtube.com/watch?v=q4P_pLUPEdg"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
->
+    frameborder="0" >
 </iframe>
     <table cellspacing="10">
         <thead>
