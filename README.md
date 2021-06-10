@@ -134,7 +134,7 @@ Android Movies Application using Kotlin and The Movies Database Application Prog
             <tr>
                 <td><img src="./dark/11.jpg" alt="Share Button" width="240"></td>
                 <td><img src="./dark/10.jpg" alt="Share menu" width="240"></td>
-                <td><img src="./gif/share.gif" alt="Share (In Action)" width="240"></td>
+                <td><img src="./gif/share.gif" alt="Share (In Action)" width="280"></td>
             </tr>
         </tbody>
     </table>
